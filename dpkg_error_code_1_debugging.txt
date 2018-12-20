@@ -1,0 +1,26 @@
+method #1
+RECONFIGURING THE PACKAGES:
+$ sudo dpkg --configure -a
+
+method #2
+USE FORCE INSTALL:
+$ sudo apt-get install -f
+
+method #3
+TRY REMOVING THE PROBLEMATIC PACKAGE:
+$ sudo apt remove
+
+method #4
+REMOVING THE POST INFO FILES OF THE PROBLEMATIC PACKAGE:
+$ ls -l /var/lib/dpkg/info | grep -i problematic_package
+
+<example output>
+$ -rw-r--r-- 1 root root 2324811 Aug 14 19:29 problematic_package.list
+$ -rw-r--r-- 1 root root 2822824 Aug 10 04:28 problematic_package.md5sums
+$ -rwxr-xr-x 1 root root     113 Aug 10 04:28 problematic_package.postinst
+$ -rwxr-xr-x 1 root root      84 Aug 10 04:28 problematic_package.postrm
+
+$ sudo mv /var/lib/dpkg/info/problematic_package.* /tmp
+
+
+# debugging_folder
